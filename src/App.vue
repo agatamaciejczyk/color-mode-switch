@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <ColorModeSwitch />
+    <ColorModeSwitch :colors="colors" />
     <h1>Color Mode Switch!</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias,
@@ -13,6 +13,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+// color palette
+import { colors } from "@/colors";
+
 // components
 import ColorModeSwitch from "@/components/ColorModeSwitch.vue";
 
@@ -20,6 +23,11 @@ export default defineComponent({
   name: "App",
   components: {
     ColorModeSwitch,
+  },
+  setup() {
+    return {
+      colors,
+    };
   },
 });
 </script>
@@ -34,10 +42,8 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background-color: var(--primary-background-color);
 
   h1 {
-    color: var(--primary-text-color);
     text-align: center;
     font-size: 4rem;
     margin: 0;
@@ -48,7 +54,6 @@ export default defineComponent({
   }
 
   p {
-    color: var(--primary-text-color);
     text-align: center;
     max-width: 40rem;
   }

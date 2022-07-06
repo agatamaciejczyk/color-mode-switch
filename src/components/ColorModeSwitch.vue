@@ -7,22 +7,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 
-import { colors } from "@/colors";
+// types
+import { Color } from "@/types/Color";
 
 export default defineComponent({
   name: "ColorModeSwitch",
-  setup() {
+  props: {
+    colors: {
+      type: Array as PropType<Color[]>,
+      default: () => [],
+    },
+  },
+  setup(props) {
     const isDarkModeLocalStorageKey = "isDarkMode";
 
     const isDarkMode = ref(
-      JSON.parse(localStorage.getItem(isDarkModeLocalStorageKey) ?? "false")
+      JSON.parse(
+        window?.localStorage?.getItem(isDarkModeLocalStorageKey) ?? "false"
+      )
     );
 
     const switchColorMode = () => {
       isDarkMode.value = !isDarkMode.value;
-      localStorage.setItem(
+      window?.localStorage?.setItem(
         isDarkModeLocalStorageKey,
         JSON.stringify(isDarkMode.value)
       );
@@ -32,14 +41,14 @@ export default defineComponent({
 
     const setVariableValues = () => {
       if (isDarkMode.value) {
-        colors.forEach((color) =>
+        props.colors.forEach((color) =>
           document.documentElement.style.setProperty(
             color.variableName,
             color.darkModeValue
           )
         );
       } else {
-        colors.forEach((color) =>
+        props.colors.forEach((color) =>
           document.documentElement.style.setProperty(
             color.variableName,
             color.lightModeValue
@@ -61,7 +70,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .color-mode-switch {
   font-size: 4rem;
-  color: var(--primary-text-color);
+  user-select: none;
   cursor: pointer;
 }
 </style>

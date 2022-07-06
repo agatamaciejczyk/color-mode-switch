@@ -2,6 +2,8 @@
 
 Color Mode Switch is a simple Vue component, which changes color theme in web application.
 
+Check it out at [color-mode-switch](https://color-mode-switch.netlify.app/)
+
 
 ## Project setup
 ```

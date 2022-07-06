@@ -39,8 +39,12 @@ export default defineComponent({
   h1 {
     color: var(--primary-text-color);
     text-align: center;
-    font-size: 8rem;
+    font-size: 4rem;
     margin: 0;
+
+    @media only screen and (min-width: 920px) {
+      font-size: 8rem;
+    }
   }
 
   p {
